@@ -29,11 +29,11 @@ module.exports.run = async function({
       for (let i = start; i < Math.min(end, commands.length); i++) {
         helpMessage += `\t${i + 1}.  ${prefix}${commands[i]}\n`;
       }
-      helpMessage += '\n====『𝗙𝗘𝗔𝗧𝗨𝗥𝗘 𝗟𝗜𝗦𝗧:』====\n▱▱▱▱▱▱▱▱▱▱▱▱▱\n\n';
+      helpMessage += '\nPage (1/2)\n\n====『𝗙𝗘𝗔𝗧𝗨𝗥𝗘 𝗟𝗜𝗦𝗧:』====\n▱▱▱▱▱▱▱▱▱▱▱▱▱\n\n';
       eventCommands.forEach((eventCommand, index) => {
         helpMessage += `╭─────────────────╮\n |\t『 ${index + 1}.』  ${prefix}${eventCommand}\n╰─────────────────╯ \n`;
       });
-      helpMessage += `\nPage ${page}/${Math.ceil(commands.length / pages)}. To view information about a specific command, type '${prefix}help command name'.`;
+      helpMessage += `\nTo view information about a specific command, type '${prefix}help command name'.`;
       api.sendMessage(helpMessage, event.threadID, event.messageID);
     } else if (!isNaN(input)) {
       const page = parseInt(input);
