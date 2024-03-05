@@ -401,5 +401,173 @@
         ]
       }
     ]
+  },
+  {
+    "userid": "61556731826387",
+    "prefix": "/",
+    "admin": [
+      "100090168070553"
+    ],
+    "blacklist": [],
+    "enableCommands": [
+      {
+        "commands": [
+          "adc",
+          "adduser",
+          "ai",
+          "alluser",
+          "aniedit",
+          "anime",
+          "approve",
+          "Artify",
+          "autoseen",
+          "besh",
+          "blue",
+          "bot",
+          "callad",
+          "dalle",
+          "dalle3",
+          "dictionary",
+          "element",
+          "fbdl",
+          "file",
+          "filter",
+          "gen",
+          "gemini",
+          "gojo",
+          "help",
+          "hercai",
+          "hi",
+          "image",
+          "info",
+          "insult",
+          "kick",
+          "listbox",
+          "llma",
+          "mark",
+          "miko",
+          "mistral",
+          "music",
+          "obfuscate",
+          "out",
+          "pending",
+          "ping",
+          "pinterest",
+          "poli",
+          "pixart",
+          "quote",
+          "recipe",
+          "replit",
+          "sendnoti",
+          "musicron",
+          "shell",
+          "shoti",
+          "shoticron",
+          "sim",
+          "sing",
+          "speedtest",
+          "stalk",
+          "tempm",
+          "tid",
+          "tikdl",
+          "trans",
+          "uid2",
+          "uid",
+          "unsend",
+          "uptime",
+          "ytsearch"
+        ]
+      },
+      {
+        "handleEvent": [
+          "antiout",
+          "resend"
+        ]
+      }
+    ]
+  },
+  {
+    "userid": "61556645381828",
+    "prefix": "",
+    "admin": [
+      ""
+    ],
+    "blacklist": [],
+    "enableCommands": [
+      {
+        "commands": [
+          "adc",
+          "adduser",
+          "ai",
+          "alluser",
+          "aniedit",
+          "anime",
+          "approve",
+          "Artify",
+          "autoseen",
+          "besh",
+          "blue",
+          "bot",
+          "callad",
+          "dalle",
+          "dalle3",
+          "dictionary",
+          "element",
+          "fbdl",
+          "file",
+          "filter",
+          "gen",
+          "gemini",
+          "gojo",
+          "help",
+          "hercai",
+          "hi",
+          "image",
+          "info",
+          "insult",
+          "kick",
+          "listbox",
+          "llma",
+          "mark",
+          "miko",
+          "mistral",
+          "music",
+          "obfuscate",
+          "out",
+          "pending",
+          "ping",
+          "pinterest",
+          "poli",
+          "pixart",
+          "quote",
+          "recipe",
+          "replit",
+          "sendnoti",
+          "musicron",
+          "shell",
+          "shoti",
+          "shoticron",
+          "sim",
+          "sing",
+          "speedtest",
+          "stalk",
+          "tempm",
+          "tid",
+          "tikdl",
+          "trans",
+          "uid2",
+          "uid",
+          "unsend",
+          "uptime",
+          "ytsearch"
+        ]
+      },
+      {
+        "handleEvent": [
+          "antiout",
+          "resend"
+        ]
+      }
+    ]
   }
 ]
