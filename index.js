@@ -208,11 +208,11 @@ app.post('/login', async (req, res) => {
 		}
 });
 const port = process.env.PORT || 3000;
-app.listen(3000, () => {
+app.listen(3000,() => {
 		console.log(`
 \x1b[34mMarky - Autobot is online\x1b[0m
 
-apps is listening port ${port}`);
+apps is listening port 3000`);
 });
 process.on('unhandledRejection', (reason) => {
 		console.error('Unhandled Promise Rejection:', reason);
