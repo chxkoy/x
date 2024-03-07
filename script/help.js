@@ -21,7 +21,7 @@ module.exports.run = async function({
     const eventCommands = enableCommands[1].handleEvent;
     const commands = enableCommands[0].commands;
     if (!input) {
-      const pages = 20;
+      const pages = 100;
       let page = 1;
       let start = (page - 1) * pages;
       let end = start + pages;
@@ -29,7 +29,8 @@ module.exports.run = async function({
       for (let i = start; i < Math.min(end, commands.length); i++) {
         helpMessage += `\t${i + 1}.  ${prefix}${commands[i]}\n`;
       }
-      helpMessage += '\nPage (1/2)\n\n====『𝗙𝗘𝗔𝗧𝗨𝗥𝗘 𝗟𝗜𝗦𝗧:』====\n▱▱▱▱▱▱▱▱▱▱▱▱▱\n\n';
+      helpMessage += `\nPage ${page} of ${Math.ceil(commands.length / pages)}\n\n`;
+      helpMessage += '====『𝗙𝗘𝗔𝗧𝗨𝗥𝗘 𝗟𝗜𝗦𝗧:』====\n▱▱▱▱▱▱▱▱▱▱▱▱▱\n\n';
       eventCommands.forEach((eventCommand, index) => {
         helpMessage += `╭─────────────────╮\n |\t『 ${index + 1}.』  ${prefix}${eventCommand}\n╰─────────────────╯ \n`;
       });
