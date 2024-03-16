@@ -1,42 +1,86 @@
-module.exports.config = {
-  name: "spotify",
-  hasPermssion: 0, 
-  description: "Search Lyrics",
-  usages: "[title of song]",
-  credits: "deku & remod to mirai by Eugene Aguilar",
-  commandCategory: "music"
+const axios = require("axios");
+const fs = require('fs');
+
+function formatSize(bytes) {
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+  if (bytes === 0) return '0 Byte';
+  const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+  return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
 }
 
-module.exports.run = async function({ api, event, args }) {
-  const fs = require("fs");
-  const axios = require("axios");
-  const t = args.join(" ");
+module.exports = {
+  config: {
+    name: "spotify",
+    version: "1.0",
+    author: "Rishad",
+    countDown: 10,
+    role: 0,
+    shortDescription: "Download Spotify musics by searching",
+    longDescription: "Download Spotify musics by searching",
+    category: "music",
+    guide: "{pn} goosebumps"
+  },
 
-  if (!t) return api.sendMessage("The title of the song is missing.", event.threadID, event.messageID);
+  run: async function ({ api, event, args }) {
+    const query = args.join(" ");
 
-  try {
-    const r = await axios.get('https://lyrist.vercel.app/api/' + t);
-    const { image, lyrics, artist, title } = r.data;
+    if (!query) {
+      return api.sendMessage("Baka 🗿 provide a track name.", event.threadID);
+    }
 
-    let ly = __dirname + "/cache/lyrics.png";
-    let suc = (await axios.get(image, { responseType: "arraybuffer" })).data;
-    fs.writeFileSync(ly, Buffer.from(suc, "utf-8"));
-    let img = fs.createReadStream(ly);
+    const SearchapiUrl = `https://for-devs.onrender.com/api/spsearch?apikey=fuck&query=${encodeURIComponent(query)}`;
 
-    api.setMessageReaction("🎼", event.messageID, (err) => {}, true);
+    try {
+      const response = await axios.get(SearchapiUrl);
+      const tracks = response.data.slice(0, 6);
 
-    return api.sendMessage({
-      body: `Title: ${title}
-Artist: ${artist}
+      if (tracks.length === 0) {
+        return api.sendMessage("❎ No tracks found for the given query.", event.threadID);
+      }
 
-𖢨°•°•——[ LYRICS ]——•°•°𖢨
-${lyrics}
-𖢨°•°•——[ LYRICS ]——•°•°𖢨`,
-      attachment: img
-    }, event.threadID, () => fs.unlinkSync(ly), event.messageID);
-  } catch (a) {
-    api.setMessageReaction("😿", event.messageID, (err) => {}, true);
+      const selectedTrack = tracks[0]; 
+      const downloadingMessage = await api.sendMessage(`✅ Downloading track "${selectedTrack.title}"`, event.threadID);
 
-    return api.sendMessage(a.message, event.threadID, event.messageID);
+      const SpdlApiUrl = 'https://for-devs.onrender.com/api/spotifydl?apikey=fuck&url=' + encodeURIComponent(selectedTrack.url);
+
+      try {
+        const apiResponse = await axios.get(SpdlApiUrl);
+
+        if (apiResponse.data.id) {
+          const {
+            artists,
+            title,
+            album,
+            releaseDate,
+            downloadUrl
+          } = apiResponse.data;
+
+          const audioResponse = await axios.get(downloadUrl, { responseType: 'arraybuffer' });
+          fs.writeFileSync(__dirname + '/cache/spotifyAudio.mp3', Buffer.from(audioResponse.data));
+
+          const fileSize = fs.statSync(__dirname + '/cache/spotifyAudio.mp3').size;
+          const sizeFormatted = formatSize(fileSize);
+
+          const attachment = fs.createReadStream(__dirname + '/cache/spotifyAudio.mp3');
+
+          const form = {
+            body: `🎶 Now playing:\n\n👤 Artists: ${artists}\n🎵 Title: ${title}\n📀 Album: ${album}\n📅 Release Date: ${releaseDate}\n📦 Size: ${sizeFormatted}`,
+            attachment: attachment
+          };
+
+          api.sendMessage(form, event.threadID);
+        } else {
+          api.sendMessage("Sorry, the Spotify content could not be downloaded.", event.threadID);
+        }
+      } catch (error) {
+        console.error(error);
+        api.sendMessage("Sorry, an error occurred while processing your request.", event.threadID);
+      }
+
+      api.unsendMessage(downloadingMessage.messageID);
+    } catch (error) {
+      console.error(error);
+      api.sendMessage("Error: " + error, event.threadID);
+    }
   }
-}
+}; 
