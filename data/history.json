@@ -1,1 +1,60 @@
-[]
+[
+  {
+    "userid": "61557907624013",
+    "prefix": "",
+    "admin": [
+      ""
+    ],
+    "blacklist": [],
+    "enableCommands": [
+      {
+        "commands": [
+          "adduser",
+          "ai",
+          "autoseen",
+          "gemini",
+          "besh",
+          "blackbox",
+          "claude",
+          "dalle",
+          "dictionary",
+          "element",
+          "google",
+          "help",
+          "listbox",
+          "lyrics",
+          "out",
+          "pending",
+          "pinterest",
+          "poli",
+          "quote",
+          "recipe",
+          "remini",
+          "removebg",
+          "rip",
+          "sendnoti",
+          "sim",
+          "simv2",
+          "sing",
+          "spotify",
+          "tempmail",
+          "tokenget",
+          "trans",
+          "trash",
+          "uid",
+          "unsend",
+          "uptime",
+          "wanted",
+          "xen",
+          "ytsearch"
+        ]
+      },
+      {
+        "handleEvent": [
+          "antiout",
+          "resend"
+        ]
+      }
+    ]
+  }
+]
